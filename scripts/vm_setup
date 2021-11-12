@@ -131,6 +131,7 @@ main() {
 		sudo_step "${STEP_DIR}/setup_ssh"
 		sudo_step "${STEP_DIR}/setup_prepare_new_instance"
 		sudo_step "${STEP_DIR}/setup_ansible"
+		sudo_step "${STEP_DIR}/setup_altlinux_release"
 	fi
 	
 	if test "${VM_TYPE}" == "vagrant-vbox"; then
@@ -139,13 +140,16 @@ main() {
 		if test "${CLOUDINIT}" == "1"; then
 			sudo_step "${STEP_DIR}/setup_cloudinit"
 		fi
-		sudo_step "${STEP_DIR}/setup_udev"
+		if test "${BASE_VERSION}" -ge "10"; then
+			sudo_step "${STEP_DIR}/setup_udev"
+		fi
 		sudo_step "/tmp/install-guest-tools.sh"
 		sudo_step "${STEP_DIR}/setup_vagrant"
 		sudo_step "${STEP_DIR}/setup_restore_sshd_config"
 		sudo_step "${STEP_DIR}/setup_ssh"
 		sudo_step "${STEP_DIR}/setup_prepare_new_instance"
 		sudo_step "${STEP_DIR}/setup_ansible"
+		sudo_step "${STEP_DIR}/setup_altlinux_release"
 	fi
 
 	sudo_step "${STEP_DIR}/setup_version"
