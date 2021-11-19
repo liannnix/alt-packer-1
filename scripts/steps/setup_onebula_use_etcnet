@@ -1,0 +1,7 @@
+#! /bin/sh
+set -euo pipefail
+
+echo "Setting up Etcnet for OpenNebula"
+curl "http://${PACKER_HTTP_ADDR}/scripts/loc-10-network-etcnet" -o "/etc/one-context.d/loc-10-network-etcnet"
+chmod +x /etc/one-context.d/loc-10-network-etcnet
+echo "Setting up Etcnet for OpenNebula complete"
